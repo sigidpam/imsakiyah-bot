@@ -1,0 +1,4 @@
+# .claspignore
+**/*.md
+node_modules/**
+.git/**

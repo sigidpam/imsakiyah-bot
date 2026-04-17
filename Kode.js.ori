@@ -1,18 +1,3 @@
-// ==========================================
-// 1. SECURE SETUP (RUN THIS ONCE)
-// ==========================================
-// Instructions: Fill in your details, click "Run" on this function at the top of the editor, 
-// and then DELETE this entire block so your secrets are never visible in the code!
-function setupSecurity() {
-  PropertiesService.getScriptProperties().setProperties({
-    'WHATSAPP_TOKEN': 'EAAfWlvtRrQgBQ6m4ZAR1Vjhrtp76Wjyek6qAcnDiKk5mI70nSZBZCyd9UEKyXrw9RCVbZCSHnM6ZCSMuhenQxQSjXV13SxxBUBC3kXAOt1qO50v03XFsjA60LyHWU9BT3Ju4ZCJcCIeix9hyC48FNV1LUz8izZBSzwCtwF9ZBN4I2Lo6N7rGk8aE8Yhx91EiTAZDZD',
-    'PHONE_NUMBER_ID': '1078955911963874',
-    'VERIFY_TOKEN': 'caritahudenganjarimu',
-    'SHEET_URL': 'https://docs.google.com/spreadsheets/d/1VkelOS0n8w7E89hyiZdYoVedbGZQlb93lRbzAFinyEs/edit',
-    'ADMIN_PHONE': '6281297423203', // Your personal number (e.g., 62857...)
-    'WEBHOOK_SECRET': 'imsakiyah_secure_password_7788' // Make up a random password here!
-  });
-}
 
 // Load properties globally so the rest of the script can access them securely
 const ENV = PropertiesService.getScriptProperties().getProperties();
@@ -26,72 +11,63 @@ const vocab = {
     menuText: "📍 *Lokasi Terdeteksi:*\n{city}, {country}\n\nApa yang ingin Anda cari?",
     prayerHeader: "🕌 *Waktu Salat*\n📍 *{city}, {country}*\n📅 {date}\n\n",
     mosqueText: "🧭 *Masjid Terdekat*\n\nKlik tautan di bawah ini untuk mencari masjid di radius sekitar Anda:\n\n{link}",
-    instruction: "Halo *{name}*! 👋\n\nUntuk mengecek jadwal salat atau mencari masjid terdekat, silakan bagikan lokasi Anda.\n\n*Caranya:*\n1. Ketuk ikon 📎 (Attachment) atau tombol ➕\n2. Pilih *Lokasi* 📍\n3. Kirim *Lokasi Saat Ini*\n\n🌐 *Ganti Bahasa:* Ketik `/lang en`, `/lang de`, `/lang es`, `/lang id`",
-    busy: "⏳ *Sistem sedang sibuk.* Terlalu banyak permintaan. Mohon tunggu 1 menit dan coba lagi."
+    instruction: "Halo *{name}*! 👋\n\nUntuk mengecek jadwal salat atau mencari masjid terdekat, silakan bagikan lokasi Anda.\n\n*Caranya:*\n1. Ketuk ikon 📎 (Attachment) atau tombol ➕\n2. Pilih *Lokasi* 📍\n3. Kirim *Lokasi Saat Ini*\n\n🌐 *Ganti Bahasa:* Ketik `/lang en`, `/lang de`, `/lang es`, `/lang id`"
   },
   en: {
     btnPrayer: "Prayer Times", btnMosque: "Nearest Mosque",
     menuText: "📍 *Location Detected:*\n{city}, {country}\n\nWhat would you like to find?",
     prayerHeader: "🕌 *Prayer Times*\n📍 *{city}, {country}*\n📅 {date}\n\n",
     mosqueText: "🧭 *Nearest Mosque*\n\nClick the link below to find mosques within your radius:\n\n{link}",
-    instruction: "Hello *{name}*! 👋\n\nTo check prayer times or find the nearest mosque, please share your location.\n\n*How to do it:*\n1. Tap the 📎 (Attachment) icon or ➕ button\n2. Select *Location* 📍\n3. Send *Send your current location*\n\n🌐 *Change Language:* Type `/lang en`, `/lang de`, `/lang es`, `/lang id`",
-    busy: "⏳ *System is busy.* Too many requests. Please wait 1 minute and tap the button again."
+    instruction: "Hello *{name}*! 👋\n\nTo check prayer times or find the nearest mosque, please share your location.\n\n*How to do it:*\n1. Tap the 📎 (Attachment) icon or ➕ button\n2. Select *Location* 📍\n3. Send *Send your current location*\n\n🌐 *Change Language:* Type `/lang en`, `/lang de`, `/lang es`, `/lang id`"
   },
   de: {
     btnPrayer: "Gebetszeiten", btnMosque: "Nächste Moschee",
     menuText: "📍 *Standort erkannt:*\n{city}, {country}\n\nWas möchten Sie finden?",
     prayerHeader: "🕌 *Gebetszeiten*\n📍 *{city}, {country}*\n📅 {date}\n\n",
     mosqueText: "🧭 *Nächste Moschee*\n\nKlicken Sie auf den Link unten, um Moscheen in Ihrem Umkreis zu finden:\n\n{link}",
-    instruction: "Hallo *{name}*! 👋\n\nUm Gebetszeiten zu überprüfen oder die nächste Moschee zu finden, teilen Sie bitte Ihren Standort.\n\n🌐 *Sprache ändern:* Tippen Sie `/lang de`, `/lang en`, `/lang id`",
-    busy: "⏳ *System ist ausgelastet.* Zu viele Anfragen. Bitte warten Sie 1 Minute und versuchen Sie es erneut."
+    instruction: "Hallo *{name}*! 👋\n\nUm Gebetszeiten zu überprüfen oder die nächste Moschee zu finden, teilen Sie bitte Ihren Standort.\n\n🌐 *Sprache ändern:* Tippen Sie `/lang de`, `/lang en`, `/lang id`"
   },
   fr: {
     btnPrayer: "Heures de prière", btnMosque: "Mosquée proche",
     menuText: "📍 *Position détectée :*\n{city}, {country}\n\nQue souhaitez-vous trouver ?",
     prayerHeader: "🕌 *Heures de prière*\n📍 *{city}, {country}*\n📅 {date}\n\n",
     mosqueText: "🧭 *Mosquée la plus proche*\n\nCliquez sur le lien ci-dessous pour trouver des mosquées dans votre rayon :\n\n{link}",
-    instruction: "Bonjour *{name}* ! 👋\n\nPour vérifier les heures de prière, veuillez partager votre position.\n\n🌐 *Changer de langue :* Tapez `/lang fr`, `/lang en`, `/lang id`",
-    busy: "⏳ *Système occupé.* Trop de requêtes. Veuillez patienter 1 minute et réessayer."
+    instruction: "Bonjour *{name}* ! 👋\n\nPour vérifier les heures de prière, veuillez partager votre position.\n\n🌐 *Changer de langue :* Tapez `/lang fr`, `/lang en`, `/lang id`"
   },
   it: {
     btnPrayer: "Orari preghiera", btnMosque: "Moschea vicina",
     menuText: "📍 *Posizione rilevata:*\n{city}, {country}\n\nCosa vorresti trovare?",
     prayerHeader: "🕌 *Orari di preghiera*\n📍 *{city}, {country}*\n📅 {date}\n\n",
     mosqueText: "🧭 *Moschea più vicina*\n\nClicca sul link sottostante per trovare le moschee nel tuo raggio:\n\n{link}",
-    instruction: "Ciao *{name}*! 👋\n\nPer controllare gli orari delle preghiere, condividi la tua posizione.\n\n🌐 *Cambia lingua:* Digita `/lang it`, `/lang en`, `/lang id`",
-    busy: "⏳ *Sistema occupato.* Troppe richieste. Attendi 1 minuto e riprova."
+    instruction: "Ciao *{name}*! 👋\n\nPer controllare gli orari delle preghiere, condividi la tua posizione.\n\n🌐 *Cambia lingua:* Digita `/lang it`, `/lang en`, `/lang id`"
   },
   es: {
     btnPrayer: "Horarios de rezo", btnMosque: "Mezquita cercana",
     menuText: "📍 *Ubicación detectada:*\n{city}, {country}\n\n¿Qué te gustaría encontrar?",
     prayerHeader: "🕌 *Horarios de rezo*\n📍 *{city}, {country}*\n📅 {date}\n\n",
     mosqueText: "🧭 *Mezquita más cercana*\n\nHaz clic en el enlace a continuación para buscar mezquitas en tu radio:\n\n{link}",
-    instruction: "¡Hola *{name}*! 👋\n\nPara consultar los horarios de rezo, comparte tu ubicación.\n\n🌐 *Cambiar idioma:* Escribe `/lang es`, `/lang en`, `/lang id`",
-    busy: "⏳ *Sistema ocupado.* Demasiadas solicitudes. Espere 1 minuto e intente de nuevo."
+    instruction: "¡Hola *{name}*! 👋\n\nPara consultar los horarios de rezo, comparte tu ubicación.\n\n🌐 *Cambiar idioma:* Escribe `/lang es`, `/lang en`, `/lang id`"
   },
   nl: { 
     btnPrayer: "Gebedstijden", btnMosque: "Nabije Moskee",
     menuText: "📍 *Locatie gedetecteerd:*\n{city}, {country}\n\nWat wil je vinden?",
     prayerHeader: "🕌 *Gebedstijden*\n📍 *{city}, {country}*\n📅 {date}\n\n",
     mosqueText: "🧭 *Dichtstbijzijnde moskee*\n\nKlik op de onderstaande link om moskeeën in je omgeving te vinden:\n\n{link}",
-    instruction: "Hallo *{name}*! 👋\n\nOm gebedstijden te controleren, deel je locatie.\n\n🌐 *Taal wijzigen:* Typ `/lang nl`, `/lang en`, `/lang id`",
-    busy: "⏳ *Systeem is druk.* Te veel verzoeken. Wacht 1 minuut en probeer het opnieuw."
+    instruction: "Hallo *{name}*! 👋\n\nOm gebedstijden te controleren, deel je locatie.\n\n🌐 *Taal wijzigen:* Typ `/lang nl`, `/lang en`, `/lang id`"
   },
   sv: { 
     btnPrayer: "Bönetider", btnMosque: "Närmaste Moské",
     menuText: "📍 *Plats upptäckt:*\n{city}, {country}\n\nVad vill du hitta?",
     prayerHeader: "🕌 *Bönetider*\n📍 *{city}, {country}*\n📅 {date}\n\n",
     mosqueText: "🧭 *Närmaste moské*\n\nKlicka på länken nedan för att hitta moskéer i din närhet:\n\n{link}",
-    instruction: "Hej *{name}*! 👋\n\nFör att kontrollera bönetider, dela din plats.\n\n🌐 *Ändra språk:* Skriv `/lang sv`, `/lang en`, `/lang id`",
-    busy: "⏳ *Systemet är upptaget.* För många förfrågningar. Vänta 1 minut och försök igen."
+    instruction: "Hej *{name}*! 👋\n\nFör att kontrollera bönetider, dela din plats.\n\n🌐 *Ändra språk:* Skriv `/lang sv`, `/lang en`, `/lang id`"
   },
   ru: { 
     btnPrayer: "Время намаза", btnMosque: "Ближайшая мечеть",
     menuText: "📍 *Местоположение:*\n{city}, {country}\n\nЧто вы хотите найти?",
     prayerHeader: "🕌 *Время намаза*\n📍 *{city}, {country}*\n📅 {date}\n\n",
     mosqueText: "🧭 *Ближайшая мечеть*\n\nНажмите на ссылку ниже, чтобы найти мечети в вашем радиусе:\n\n{link}",
-    instruction: "Здравствуйте, *{name}*! 👋\n\nЧтобы узнать время намаза, пожалуйста, поделитесь своим местоположением.\n\n🌐 *Изменить язык:* Введите `/lang ru`, `/lang en`, `/lang id`",
-    busy: "⏳ *Система занята.* Слишком много запросов. Пожалуйста, подождите 1 минуту и повторите попытку."
+    instruction: "Здравствуйте, *{name}*! 👋\n\nЧтобы узнать время намаза, пожалуйста, поделитесь своим местоположением.\n\n🌐 *Изменить язык:* Введите `/lang ru`, `/lang en`, `/lang id`"
   }
 };
 
@@ -189,49 +165,16 @@ function doPost(e) {
               methodParam = "&method=3"; 
             }
 
-            // --- 🛡️ NEW BOT MEMORY (CACHING SYSTEM) ---
-            const roundLat = parseFloat(lat).toFixed(2);
-            const roundLon = parseFloat(lon).toFixed(2);
-            const cacheKey = `prayer_${roundLat}_${roundLon}${methodParam}`;
-            
-            const cache = CacheService.getScriptCache();
-            const cachedData = cache.get(cacheKey);
-            
-            let timings, date;
-
-            if (cachedData) {
-              // 🟢 MEMORY HIT: Use saved data
-              const parsed = JSON.parse(cachedData);
-              timings = parsed.timings;
-              date = parsed.date;
-              sheet.appendRow([new Date(), "PRAYER SENT (CACHED)", `Lang: ${lang}, Memory hit for ${city}`]);
-            } else {
-              // 🔴 MEMORY MISS: Fetch from Aladhan
-              const aladhanUrl = `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}${methodParam}`;
-              const res = UrlFetchApp.fetch(aladhanUrl, { muteHttpExceptions: true }); 
-              
-              // Handle Rate Limit gracefully
-              if (res.getResponseCode() === 429) {
-                sendMetaReply(senderPhone, t.busy);
-                sheet.appendRow([new Date(), "API 429 RATE LIMIT", `Blocked by Aladhan for ${senderPhone}`]);
-                return ContentService.createTextOutput("Rate limited");
-              }
-
-              const aladhanData = JSON.parse(res.getContentText());
-              if (aladhanData.code !== 200) throw new Error("Aladhan API Error");
-
-              timings = aladhanData.data.timings;
-              date = aladhanData.data.date.readable;
-              
-              // Save fresh data to Cache for 6 Hours (21600 seconds)
-              cache.put(cacheKey, JSON.stringify({ timings: timings, date: date }), 21600);
-              sheet.appendRow([new Date(), "PRAYER SENT (NEW API CALL)", `Lang: ${lang}, Math for: ${countryName || "Global Default"}`]);
-            }
+            const aladhanUrl = `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}${methodParam}`;
+            const aladhanData = JSON.parse(UrlFetchApp.fetch(aladhanUrl).getContentText());
+            const timings = aladhanData.data.timings;
+            const date = aladhanData.data.date.readable;
             
             const header = t.prayerHeader.replace("{city}", city).replace("{country}", country).replace("{date}", date);
             const timesList = `Imsak: ${timings.Imsak}\nFajr/Subuh: ${timings.Fajr}\nDhuhr/Zuhur: ${timings.Dhuhr}\nAsr: ${timings.Asr}\nMaghrib: ${timings.Maghrib}\nIsha: ${timings.Isha}`;
                               
             sendMetaReply(senderPhone, header + timesList);
+            sheet.appendRow([new Date(), "PRAYER SENT", `Lang: ${lang}, Math for: ${countryName || "Global Default"}`]);
           } 
           else if (action === 'mosque') {
             const mapsLink = `https://www.google.com/maps/search/masjid/@${lat},${lon},14z`;
@@ -354,3 +297,4 @@ function sendToMeta(payload) {
   const metaUrl = `https://graph.facebook.com/v18.0/${ENV.PHONE_NUMBER_ID}/messages`;
   UrlFetchApp.fetch(metaUrl, { method: 'post', contentType: 'application/json', headers: { 'Authorization': `Bearer ${ENV.WHATSAPP_TOKEN}` }, payload: JSON.stringify(payload), muteHttpExceptions: true });
 }
+
