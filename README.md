@@ -1,37 +1,48 @@
-# 🕌 Imsakiyah WhatsApp Bot
+# 🕌 Imsakiyah WhatsApp Bot (High-Performance Edition)
 
 <p align="center">
   <img src="assets/logo.png" alt="Imsakiyah Bot Logo" width="150"/>
 </p>
 
-A serverless, stateless WhatsApp Bot built on Google Apps Script and the Meta Cloud API. It provides hyper-accurate, localized prayer times and nearest mosque discovery worldwide without requiring user registration.
+Imsakiyah Bot adalah solusi WhatsApp berbasis *serverless* yang memberikan jadwal salat presisi dan pencarian masjid terdekat secara real-time. Versi ini telah dioptimalkan untuk skalabilitas tinggi dengan sistem caching dan perlindungan API.
 
-## ✨ Key Features
+## 🚀 Fitur Unggulan Terbaru
 
-* **Hyper-Local Calculation Engine:** Dynamically detects the user's country and switches astronomical calculation methods on the fly (e.g., automatically applying JAKIM's 18° Subuh angle and safety margins for Malaysia, or Kemenag for Indonesia).
-* **Stateless Architecture:** Bypasses API rate limits and database latency by securely passing coordinate payloads directly within WhatsApp Interactive Buttons.
-* **Smart Auto-Translation (i18n):** Parses user country codes to automatically serve the UI in 9 languages (EN, ID, DE, FR, IT, ES, NL, SV, RU), with a manual `/lang` override saved to a Google Sheets database.
-* **Enterprise-Grade Geocoding:** Utilizes Google's native `Maps.newGeocoder()` backend to bypass the strict rate-limiting of open-source mapping APIs.
-* **Zero-Downtime Security:** Webhook is protected by custom URL query verification, and API secrets are securely stored in Google's `PropertiesService`.
+* **Smart Caching System:** Mengurangi latensi dan penggunaan kuota API hingga 90% menggunakan `CacheService`. Data jadwal salat disimpan selama 6 jam berdasarkan koordinat wilayah (grid 1.1km).
+* **Graceful Rate Limit Handling:** Dilengkapi pendeteksi *Error 429 (Too Many Requests)*. Jika API eksternal sibuk, bot akan memberikan respon edukatif kepada user, bukan sekadar diam atau error.
+* **Enterprise Geocoding:** Menggunakan Google Native Maps Engine yang lebih stabil dan cepat dibandingkan provider open-source lainnya.
+* **Multi-Language Engine (i18n):** Mendukung 9 bahasa secara otomatis berdasarkan kode negara nomor WhatsApp atau pilihan manual melalui command `/lang`.
+* **Zero-Trust Security:** Webhook dilindungi oleh *secret query parameter* dan seluruh kredensial disimpan dalam `PropertiesService` (Environment Variables), bukan dalam kode mentah.
 
-## 🛠️ Tech Stack
-* **Platform:** Google Apps Script (Serverless)
-* **Messaging:** WhatsApp Business Cloud API (Meta)
-* **Database:** Google Sheets API
-* **APIs:** Aladhan API, Google Maps Reverse Geocoder
 
-## 🚀 How It Works
-1. User sends a WhatsApp Location Pin 📍
-2. Bot reverse-geocodes the coordinates and presents an interactive menu.
-3. User clicks **Prayer Times** or **Nearest Mosque**.
-4. Bot calculates highly accurate regional times or generates a custom Google Maps radar radius link.
+## 🛠️ Arsitektur Sistem
+1.  **VS Code:** Lingkungan pengembangan utama.
+2.  **Clasp:** Menjembatani kode lokal dengan Google Cloud Environment.
+3.  **Google Apps Script:** Engine serverless yang memproses logika bisnis.
+4.  **Google Sheets:** Database ringan untuk menyimpan preferensi bahasa dan log transaksi.
+5.  **Meta WhatsApp Cloud API:** Gateway komunikasi utama ke pengguna.
 
-## 💡 Technical Highlights
-*Instead of caching states in a database which slows down response times, state (lat/lon, city, country) is embedded in the `button_reply.id` payload:*
-`prayer|3.1390|101.6869|Kuala Lumpur|Malaysia`
+## 📦 Cara Instalasi & Update
 
-## 👨‍💻 Setup (For Developers)
-1. Copy `Code.js` to a new Google Apps Script project.
-2. Run `setupSecurity()` to input your Meta Tokens and Webhook secrets into `PropertiesService`.
-3. Deploy as a Web App (Anyone with link).
-4. Add the Web App URL to your Meta Developer Dashboard with your custom secret query parameter.
+### Prasyarat
+- Node.js & NPM
+- Google `clasp` terinstal secara global (`npm install -g @google/clasp`)
+
+### Langkah Setup
+1. Clone repositori ini.
+2. Hubungkan dengan project Apps Script Anda:
+   ```bash
+   clasp clone "YOUR_SCRIPT_ID"
+
+3. Konfigurasi kredensial melalui fungsi setupSecurity() di Code.js, lalu jalankan sekali di editor browser.
+4. Deploy aplikasi
+   ```bash
+   clasp push
+   clasp deploy -i "YOUR_DEPLOYMENT_ID"
+
+🔒 Keamanan Webhook
+Pastikan URL Webhook yang didaftarkan di Meta Developer Portal menyertakan kunci rahasia Anda:
+https://script.google.com/.../exec?secret=PASSWORD_RAHASIA_ANDA
+
+📄 Lisensi
+Distribusi bebas untuk tujuan edukasi dan komunitas.
